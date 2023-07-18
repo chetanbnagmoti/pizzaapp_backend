@@ -5,7 +5,7 @@ const key_secret=process.env.KEY_SECRET;
 
 module.exports.orders=(req,res)=>{
     
-    let instance = new Razorpay({ key_id: key_id, key_secret: key_secret });
+    let instance = new Razorpay({ key_id: `${key_id}`, key_secret: `${key_secret}` });
     var options = {
         amount: req.body.amount*100,  // amount in the smallest currency unit
         currency: "INR",
@@ -38,7 +38,7 @@ module.exports.verify=(req,res)=>{
         return hmac.digest('hex');
       }
 
-    var generated_signature = hmac_sha256(body , key_secret);
+    var generated_signature = hmac_sha256(body , `${key_secret}`);
 
     if (generated_signature ==req.body.response.razorpay_signature) {
         
